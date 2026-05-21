@@ -11,39 +11,70 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.horoscope.matcher.ui.theme.LocalAppColors
 
-/** Shown only on first launch – "Are you looking for a Boy or Girl?" */
 @Composable
 fun HomeScreen(onSelect: (lookingFor: String) -> Unit) {
+    val appColors = LocalAppColors.current
+
     Column(
         modifier = Modifier.fillMaxSize().padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("💫", fontSize = 64.sp, textAlign = TextAlign.Center)
+        Text("🪔", fontSize = 56.sp, textAlign = TextAlign.Center)
+        Spacer(Modifier.height(8.dp))
+        Text("🕉️", fontSize = 36.sp, textAlign = TextAlign.Center)
         Spacer(Modifier.height(16.dp))
         Text(
+            "ஜோதிட பொருத்தம்",
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(Modifier.height(4.dp))
+        Text(
             "AstroMatch",
-            fontSize = 30.sp,
+            fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = appColors.gold
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            "Find your zodiac compatibility",
-            fontSize = 16.sp,
+            "Vedic 10-Porutham Matching",
+            fontSize = 15.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(48.dp))
-        Text(
-            "Are you looking for a…",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Medium
-        )
-        Spacer(Modifier.height(24.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            GenderButton("👦  Boy", Color(0xFF1976D2)) { onSelect("boy") }
-            GenderButton("👧  Girl", Color(0xFFD81B60)) { onSelect("girl") }
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp).fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    "யாருக்கு பொருத்தம் பார்க்க வேண்டும்?",
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    "Who are you matching for?",
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Medium
+                )
+                Spacer(Modifier.height(20.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    GenderButton("👦  Boy", Color(0xFF1565C0)) { onSelect("boy") }
+                    GenderButton("👧  Girl", Color(0xFFC62828)) { onSelect("girl") }
+                }
+            }
         }
     }
 }
@@ -52,8 +83,8 @@ fun HomeScreen(onSelect: (lookingFor: String) -> Unit) {
 private fun GenderButton(label: String, color: Color, onClick: () -> Unit) {
     Button(
         onClick = onClick,
-        modifier = Modifier.size(140.dp, 56.dp),
-        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.size(140.dp, 52.dp),
+        shape = RoundedCornerShape(14.dp),
         colors = ButtonDefaults.buttonColors(containerColor = color)
-    ) { Text(label, fontSize = 18.sp) }
+    ) { Text(label, fontSize = 17.sp) }
 }

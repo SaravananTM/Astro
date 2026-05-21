@@ -52,8 +52,11 @@ fun DashboardScreen(
         drawerContent = {
             ModalDrawerSheet(modifier = Modifier.width(280.dp)) {
                 Spacer(Modifier.height(24.dp))
-                Text("  💫 AstroMatch", fontSize = 22.sp, fontWeight = FontWeight.Bold,
+                Text("  🪔 AstroMatch", fontSize = 22.sp, fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(horizontal = 24.dp))
+                Text("     ஜோதிட பொருத்தம்", fontSize = 13.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 24.dp))
                 Spacer(Modifier.height(24.dp))
                 Divider()
@@ -98,7 +101,7 @@ fun DashboardScreen(
                     Icon(Icons.Default.Menu, contentDescription = "Menu")
                 }
                 Spacer(Modifier.weight(1f))
-                Text("💫 AstroMatch", fontSize = 22.sp, fontWeight = FontWeight.Bold,
+                Text("🪔 AstroMatch", fontSize = 22.sp, fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary)
                 Spacer(Modifier.weight(1f))
                 Spacer(Modifier.width(48.dp))
@@ -128,7 +131,9 @@ fun DashboardScreen(
             Button(onClick = onCheckMatch, modifier = Modifier.fillMaxWidth().height(60.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
-            ) { Text("Check Match with a $lookingFor ❤️", fontSize = 18.sp) }
+            ) {
+                Text("பொருத்தம் பார்க்க  •  Match $lookingFor", fontSize = 16.sp)
+            }
 
             // Recent match card
             if (recentMatch != null) {

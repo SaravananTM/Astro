@@ -8,5 +8,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-app/src/main/java/com/horoscope/matcher/api/ApiConfig.kt
 keystore.jks
+.DS_Store

@@ -10,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,17 +38,9 @@ fun PersonForm(
     var rasiExpanded by remember { mutableStateOf(false) }
     var starExpanded by remember { mutableStateOf(false) }
     var placeExpanded by remember { mutableStateOf(false) }
-    var placeSearch by remember { mutableStateOf("") }
 
     val ctx = LocalContext.current
     val fmt = DateTimeFormatter.ofPattern("dd MMM yyyy")
-
-    val filteredPlaces = remember(placeSearch) {
-        if (placeSearch.isBlank()) TamilNaduPlaces.cities
-        else TamilNaduPlaces.cities.filter {
-            it.contains(placeSearch, ignoreCase = true)
-        }
-    }
 
     val isValid = name.isNotBlank() && dobDisplay.isNotBlank()
             && birthPlace.isNotBlank() && selectedRasi != null && selectedStar != null
@@ -108,32 +101,32 @@ fun PersonForm(
         }
         Spacer(Modifier.height(12.dp))
 
-        // Birth Place dropdown with search
-        ExposedDropdownMenuBox(
-            expanded = placeExpanded,
-            onExpandedChange = { placeExpanded = !placeExpanded }
-        ) {
+        // Birth Place dropdown
+        Box(modifier = Modifier.fillMaxWidth()) {
             OutlinedTextField(
-                value = placeSearch,
-                onValueChange = { placeSearch = it; placeExpanded = true },
+                value = birthPlace,
+                onValueChange = {},
+                readOnly = true,
                 label = { Text("Birth Place (Tamil Nadu)") },
-                singleLine = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(placeExpanded) },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(placeExpanded)
+                },
+                modifier = Modifier.fillMaxWidth()
             )
-            if (filteredPlaces.isNotEmpty()) {
-                ExposedDropdownMenu(
+            Surface(
+                modifier = Modifier.matchParentSize(),
+                color = Color.Transparent,
+                onClick = { placeExpanded = true }
+            ) {}
+            Box(modifier = Modifier.align(Alignment.TopEnd)) {
+                DropdownMenu(
                     expanded = placeExpanded,
                     onDismissRequest = { placeExpanded = false }
                 ) {
-                    filteredPlaces.take(10).forEach { place ->
+                    TamilNaduPlaces.cities.forEach { place ->
                         DropdownMenuItem(
                             text = { Text(place) },
-                            onClick = {
-                                birthPlace = place
-                                placeSearch = place
-                                placeExpanded = false
-                            }
+                            onClick = { birthPlace = place; placeExpanded = false }
                         )
                     }
                 }
@@ -142,54 +135,66 @@ fun PersonForm(
         Spacer(Modifier.height(12.dp))
 
         // Rasi dropdown
-        ExposedDropdownMenuBox(
-            expanded = rasiExpanded,
-            onExpandedChange = { rasiExpanded = !rasiExpanded }
-        ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
             OutlinedTextField(
-                value = selectedRasi?.displayName ?: "",
+                value = selectedRasi?.let { "${it.displayName}  (${it.tamil})" } ?: "",
                 onValueChange = {},
                 readOnly = true,
                 label = { Text("Rasi (Moon Sign)") },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(rasiExpanded) },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(rasiExpanded)
+                },
+                modifier = Modifier.fillMaxWidth()
             )
-            ExposedDropdownMenu(
-                expanded = rasiExpanded,
-                onDismissRequest = { rasiExpanded = false }
-            ) {
-                Rasi.entries.forEach { rasi ->
-                    DropdownMenuItem(
-                        text = { Text("${rasi.displayName}  (${rasi.tamil})") },
-                        onClick = { selectedRasi = rasi; rasiExpanded = false }
-                    )
+            Surface(
+                modifier = Modifier.matchParentSize(),
+                color = Color.Transparent,
+                onClick = { rasiExpanded = true }
+            ) {}
+            Box(modifier = Modifier.align(Alignment.TopEnd)) {
+                DropdownMenu(
+                    expanded = rasiExpanded,
+                    onDismissRequest = { rasiExpanded = false }
+                ) {
+                    Rasi.entries.forEach { rasi ->
+                        DropdownMenuItem(
+                            text = { Text("${rasi.displayName}  (${rasi.tamil})") },
+                            onClick = { selectedRasi = rasi; rasiExpanded = false }
+                        )
+                    }
                 }
             }
         }
         Spacer(Modifier.height(12.dp))
 
         // Star dropdown
-        ExposedDropdownMenuBox(
-            expanded = starExpanded,
-            onExpandedChange = { starExpanded = !starExpanded }
-        ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
             OutlinedTextField(
-                value = selectedStar?.displayName ?: "",
+                value = selectedStar?.let { "${it.displayName}  (${it.tamil})" } ?: "",
                 onValueChange = {},
                 readOnly = true,
                 label = { Text("Star (Nakshatra)") },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(starExpanded) },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(starExpanded)
+                },
+                modifier = Modifier.fillMaxWidth()
             )
-            ExposedDropdownMenu(
-                expanded = starExpanded,
-                onDismissRequest = { starExpanded = false }
-            ) {
-                Star.entries.forEach { star ->
-                    DropdownMenuItem(
-                        text = { Text("${star.displayName}  (${star.tamil})") },
-                        onClick = { selectedStar = star; starExpanded = false }
-                    )
+            Surface(
+                modifier = Modifier.matchParentSize(),
+                color = Color.Transparent,
+                onClick = { starExpanded = true }
+            ) {}
+            Box(modifier = Modifier.align(Alignment.TopEnd)) {
+                DropdownMenu(
+                    expanded = starExpanded,
+                    onDismissRequest = { starExpanded = false }
+                ) {
+                    Star.entries.forEach { star ->
+                        DropdownMenuItem(
+                            text = { Text("${star.displayName}  (${star.tamil})") },
+                            onClick = { selectedStar = star; starExpanded = false }
+                        )
+                    }
                 }
             }
         }

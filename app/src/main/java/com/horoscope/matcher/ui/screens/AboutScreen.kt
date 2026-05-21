@@ -35,11 +35,15 @@ fun AboutScreen(onBack: () -> Unit) {
 
         Spacer(Modifier.height(40.dp))
 
-        Text("💫", fontSize = 64.sp)
+        Text("🪔", fontSize = 56.sp)
+        Spacer(Modifier.height(8.dp))
+        Text("🕉️", fontSize = 32.sp)
         Spacer(Modifier.height(16.dp))
 
         Text("AstroMatch", fontSize = 28.sp, fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary)
+        Text("ஜோதிட பொருத்தம்", fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
         Spacer(Modifier.height(8.dp))
 
         Text("Version 1.0", fontSize = 14.sp,
@@ -55,7 +59,7 @@ fun AboutScreen(onBack: () -> Unit) {
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(
-                    "Discover your horoscope compatibility with your partner. Get accurate match details quickly and easily—no hassle.",
+                    "Traditional Vedic 10-Porutham matching based on Tamil/South Indian astrology.\n\nபாரம்பரிய வேத 10-பொருத்தம் — தமிழ் ஜோதிட முறைப்படி துல்லியமான பொருத்தம் பார்க்கலாம்.",
                     fontSize = 15.sp,
                     textAlign = TextAlign.Center,
                     lineHeight = 22.sp,

@@ -6,16 +6,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.horoscope.matcher.data.UserPrefs
+import com.horoscope.matcher.ui.theme.LocalAppColors
 
 @Composable
 fun PersonalDetailScreen(prefs: UserPrefs, onBack: () -> Unit) {
     val emoji = if (prefs.userSex == "boy") "👦" else "👧"
-    val cardColor = if (prefs.userSex == "boy") Color(0xFFE3F2FD) else Color(0xFFFCE4EC)
+    val appColors = LocalAppColors.current
+    val cardColor = if (prefs.userSex == "boy") appColors.boyCard else appColors.girlCard
 
     Column(modifier = Modifier.fillMaxSize().padding(24.dp)) {
         TextButton(onClick = onBack) { Text("← Back") }

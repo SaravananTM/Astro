@@ -38,7 +38,7 @@ fun ResultScreen(
         else -> "💔"
     }
     val shareText = buildString {
-        appendLine("💫 AstroMatch - Compatibility Report")
+        appendLine("🪔 AstroMatch - பொருத்த அறிக்கை")
         appendLine("👦 $boyName  $coupleEmoji  👧 $girlName")
         appendLine("Score: ${result.matchedCount}/${result.totalCount}")
         appendLine(result.verdict)
@@ -81,7 +81,10 @@ fun ResultScreen(
             }
         }
 
-        Text("💫 Compatibility Report", fontSize = 24.sp,
+        Text("🪔 பொருத்த அறிக்கை", fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center)
+        Text("Compatibility Report", fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center)
@@ -114,7 +117,7 @@ fun ResultScreen(
         Spacer(Modifier.height(20.dp))
 
         // 10 Poruthams
-        Text("📋 10 Poruthams", fontSize = 18.sp, fontWeight = FontWeight.Bold,
+        Text("📋 10 பொருத்தங்கள் (Poruthams)", fontSize = 18.sp, fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.Start))
         Spacer(Modifier.height(8.dp))
 
@@ -124,7 +127,7 @@ fun ResultScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        Text("⚠️ Dosham Analysis", fontSize = 18.sp, fontWeight = FontWeight.Bold,
+        Text("⚠️ தோஷ பகுப்பாய்வு (Dosham)", fontSize = 18.sp, fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.Start))
         Spacer(Modifier.height(8.dp))
 
@@ -138,7 +141,7 @@ fun ResultScreen(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth().height(52.dp),
             shape = RoundedCornerShape(16.dp)
-        ) { Text("Try Another Match 🔄", fontSize = 16.sp) }
+        ) { Text("மீண்டும் பார்க்க  •  Try Another 🔄", fontSize = 15.sp) }
 
         Spacer(Modifier.height(16.dp))
     }
